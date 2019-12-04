@@ -283,7 +283,7 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
 
         int index = beanClassName.lastIndexOf(".");
         String beanSimpleName = beanClassName.substring(index + 1);
-        String targetClassName = makeMapperPackage.replace(";", "") + "." + beanSimpleName + "Mapper";
+        String targetClassName = makeMapperPackage.replace(";", "") + "." + beanSimpleName + "mapper";
         return targetClassName;
 
     }
@@ -291,7 +291,7 @@ public class ClassPathAutoMapperScanner extends ClassPathBeanDefinitionScanner {
     public String getTargetClassSimpleName(String beanClassName) {
         int index = beanClassName.lastIndexOf(".");
         String beanSimpleName = beanClassName.substring(index + 1);
-        String targetClassSimpleName = beanSimpleName + "Mapper";
+        String targetClassSimpleName = beanSimpleName + "mapper";
         return targetClassSimpleName;
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -58,18 +59,30 @@ public class MysqlGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
+        //生成文件的输出目录【默认 D 盘根目录】
         gc.setOutputDir(projectPath + "/mybatis-plus-sample-generator/src/main/java");
-        gc.setAuthor("jobob");
+        //是否覆盖已有文件
+        gc.setFileOverride(true);
+        //是否在xml中添加二级缓存配置
+        gc.setEnableCache(false);
+        //开发人员
+        gc.setAuthor("zhangkun");
+        //是否打开输出目录
         gc.setOpen(false);
+        //BaseResultMap
+        gc.setBaseResultMap(true);
+        //baseColumnList
+        gc.setBaseColumnList(true);
+        gc.setIdType(IdType.ID_WORKER_STR);
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/ant?useUnicode=true&serverTimezone=GMT&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/mybatisplustest?useUnicode=true&serverTimezone=GMT&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("1q2w3e4r");
+        dsc.setPassword("123456");
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -91,7 +104,7 @@ public class MysqlGenerator {
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
                 return projectPath + "/mybatis-plus-sample-generator/src/main/resources/mapper/" + pc.getModuleName()
-                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                        + "/" + tableInfo.getEntityName() + "mapper" + StringPool.DOT_XML;
             }
         });
         cfg.setFileOutConfigList(focList);
@@ -102,11 +115,17 @@ public class MysqlGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+/*
         strategy.setSuperEntityClass("com.baomidou.mybatisplus.samples.generator.common.BaseEntity");
+*/
         strategy.setEntityLombokModel(true);
+/*
         strategy.setSuperControllerClass("com.baomidou.mybatisplus.samples.generator.common.BaseController");
+*/
         strategy.setInclude(scanner("表名"));
+/*
         strategy.setSuperEntityColumns("id");
+*/
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

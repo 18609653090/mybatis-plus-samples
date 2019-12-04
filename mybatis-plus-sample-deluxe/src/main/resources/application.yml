@@ -15,6 +15,6 @@ logging:
 
 mybatis-plus:
   # 扫描 mapper.xml
-  mapper-locations: classpath:/mapper/*Mapper.xml
+  mapper-locations: classpath:/mapper/*mapper.xml
   configuration:
     jdbc-type-for-null: 'null'
